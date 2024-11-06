@@ -18,6 +18,7 @@ export class Figure {
   cell: Cell
   name: FigureNames
   id: number
+  isCheck: boolean
 
   constructor(color: Colors, cell: Cell) {
     this.color = color
@@ -26,11 +27,16 @@ export class Figure {
     this.logo = null
     this.name = FigureNames.FIGURE
     this.id = Math.random()
+    this.isCheck = false
   }
 
   canMove(target: Cell): boolean {
     if (target.figure?.color === this.color) return false
-    if (target.figure?.name === FigureNames.KING) return false
+    if (target.figure?.name === FigureNames.KING) {
+      target.figure.isCheck = true
+      console.log(target.figure.isCheck)
+      return false
+    }
     return true
   }
 
